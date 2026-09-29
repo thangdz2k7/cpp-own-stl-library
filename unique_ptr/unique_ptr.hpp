@@ -39,4 +39,16 @@ public:
     T *get() const noexcept {
         return pointer_;
     }
+
+    T& operator*() const noexcept {
+        return *pointer_;
+    }
+
+    T* operator->() const noexcept {
+        return pointer_;
+    }
+
+    explicit operator bool() const noexcept {
+        return pointer_ != nullptr;
+    }
 };

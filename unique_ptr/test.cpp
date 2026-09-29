@@ -11,6 +11,10 @@ public:
     ~Person() {
         std::cout << "Person destroyed\n";
     }
+
+    void say_hello() const {
+        std::cout << "Hello from person\n";
+    }
 };
 
 int main() {
@@ -26,6 +30,16 @@ int main() {
 
     std::cout << "second owns the object after move: "
               << (second.get() != nullptr) << '\n';
+
+    unique_ptr<Person> person(new Person());
+
+    if (person) {
+        person->say_hello();
+    }
+
+    if (person) {
+        (*person).say_hello();
+    }
 
     return 0;
 }

@@ -19,4 +19,24 @@ public:
     unique_ptr(const unique_ptr&) = delete;
 
     unique_ptr& operator=(const unique_ptr&) = delete;
+
+    unique_ptr(unique_ptr&& other) noexcept
+        : pointer_(other.pointer_) {
+        other.pointer_ = nullptr;
+    }
+
+    unique_ptr& operator=(unique_ptr&& other) noexcept {
+        if (this != &other) {
+            delete pointer_;
+
+            pointer_ = other.pointer_;
+            other.pointer_ = nullptr;
+        }
+
+        return *this;
+    }
+
+    T *get() const noexcept {
+        return pointer_;
+    }
 };
